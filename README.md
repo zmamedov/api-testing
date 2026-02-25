@@ -1,3 +1,5 @@
-# api-testing
+# Тестирование REST API
 
-Репозиторий для тестирования сайта https://jsonplaceholder.typicode.com/
+Проект тестирования АПИ [JSON Placeholder](https://jsonplaceholder.typicode.com) с использованием Postman.
+
+Чек-лист.

@@ -6,5 +6,47 @@
     "_exporter_id": "9204893",
     "_collection_link": "https://go.postman.co/collection/9204893-77b4d570-7d9b-4b3d-b96a-c43981f5c041?source=collection_link"
   },
-  "item": []
+  "item": [
+    {
+      "name": "Get All Posts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Single Post By Valid Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/2",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }

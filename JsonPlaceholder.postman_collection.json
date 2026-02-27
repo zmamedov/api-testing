@@ -13,12 +13,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://jsonplaceholder.typicode.com/posts",
-          "protocol": "https",
+          "raw": "{{url}}/posts",
           "host": [
-            "jsonplaceholder",
-            "typicode",
-            "com"
+            "{{url}}"
           ],
           "path": [
             "posts"
@@ -33,12 +30,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://jsonplaceholder.typicode.com/posts/2",
-          "protocol": "https",
+          "raw": "{{url}}/posts/2",
           "host": [
-            "jsonplaceholder",
-            "typicode",
-            "com"
+            "{{url}}"
           ],
           "path": [
             "posts",
@@ -47,6 +41,36 @@
         }
       },
       "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": ""
     }
   ]
 }

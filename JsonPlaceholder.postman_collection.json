@@ -25,6 +25,91 @@
       "response": []
     },
     {
+      "name": "Get All Comments",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/comments",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Photos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/photos",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "photos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Albums",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/albums",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "albums"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Todos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/todos",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "todos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/users",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Get Single Post By Valid Id",
       "request": {
         "method": "GET",

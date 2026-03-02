@@ -126,6 +126,74 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Get Nested Resources Of Post",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/posts/1/comments",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "posts",
+            "1",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Posts By UserID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/posts?userId=10",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "posts"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Create Post",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Test json\",\r\n    \"body\": \"dfghjdfg 88dg cfgd;; gghf99999;;34,!\",\r\n    \"userId\": 178\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/posts",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [

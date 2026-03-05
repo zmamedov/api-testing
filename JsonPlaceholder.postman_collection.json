@@ -194,6 +194,87 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "PUT  Update Post",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 2,\r\n    \"title\": \"New post\",\r\n    \"body\": \"New body for the test PUT\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/posts/2",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH Update One Field Of Post",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"body\": \"New body for the test PATCH\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/posts/2",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE Delete Post",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/posts/2",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [

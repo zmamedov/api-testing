@@ -8,273 +8,381 @@
   },
   "item": [
     {
-      "name": "Get All Posts",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/posts",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Comments",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/comments",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "comments"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Photos",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/photos",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "photos"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Albums",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/albums",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "albums"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Todos",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/todos",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "todos"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Users",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/users",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "users"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Single Post By Valid Id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/posts/2",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts",
-            "2"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Nested Resources Of Post",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/posts/1/comments",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts",
-            "1",
-            "comments"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Posts By UserID",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/posts?userId=10",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts"
-          ],
-          "query": [
-            {
-              "key": "userId",
-              "value": "10"
+      "name": "Smoke tests",
+      "item": [
+        {
+          "name": "Get All Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/posts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts"
+              ]
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "POST Create Post",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"title\": \"Test json\",\r\n    \"body\": \"dfghjdfg 88dg cfgd;; gghf99999;;34,!\",\r\n    \"userId\": 178\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "{{url}}/posts",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts"
-          ]
+        {
+          "name": "Get All Comments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/comments",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Photos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/photos",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "photos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Albums",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/albums",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "albums"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Todos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/todos",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "todos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "PUT  Update Post",
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 2,\r\n    \"title\": \"New post\",\r\n    \"body\": \"New body for the test PUT\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Functional tests",
+      "item": [
+        {
+          "name": "Get Single Post By Valid Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/posts/2",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts",
+                "2"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "{{url}}/posts/2",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts",
-            "2"
-          ]
+        {
+          "name": "Get Nested Resources Of Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/posts/1/comments",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts",
+                "1",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Posts By UserID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/posts?userId=10",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Test json\",\r\n    \"body\": \"dfghjdfg 88dg cfgd;; gghf99999;;34,!\",\r\n    \"userId\": 178\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/posts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT  Update Post",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 2,\r\n    \"title\": \"New post\",\r\n    \"body\": \"New body for the test PUT\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/posts/2",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Update One Field Of Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"body\": \"New body for the test PATCH\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/posts/2",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/posts/2",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts",
+                "2"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "PATCH Update One Field Of Post",
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"body\": \"New body for the test PATCH\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Negative tests",
+      "item": [
+        {
+          "name": "GET Non-existent Post",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/posts/2222",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts",
+                "2222"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "{{url}}/posts/2",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts",
-            "2"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "DELETE Delete Post",
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "GET Posts By Invalid Query Parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/posts?userId=string",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "string"
+                }
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "{{url}}/posts/2",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "posts",
-            "2"
-          ]
+        {
+          "name": "POST Create Post With Invalid Data",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"incorrect_field\": \"Test json\",\r\n    \"body11\": 11111,\r\n    \"userId\": \"letter\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/posts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Post With Empty Body",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/posts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     }
   ],
   "event": [

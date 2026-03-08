@@ -16,9 +16,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/posts",
+              "raw": "{{baseUrl}}/posts",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts"
@@ -33,9 +33,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/comments",
+              "raw": "{{baseUrl}}/comments",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "comments"
@@ -50,9 +50,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/photos",
+              "raw": "{{baseUrl}}/photos",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "photos"
@@ -67,9 +67,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/albums",
+              "raw": "{{baseUrl}}/albums",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "albums"
@@ -84,9 +84,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/todos",
+              "raw": "{{baseUrl}}/todos",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "todos"
@@ -101,9 +101,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/users",
+              "raw": "{{baseUrl}}/users",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "users"
@@ -149,9 +149,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/posts/2",
+              "raw": "{{baseUrl}}/posts/2",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts",
@@ -167,9 +167,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/posts/1/comments",
+              "raw": "{{baseUrl}}/posts/1/comments",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts",
@@ -186,9 +186,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/posts?userId=10",
+              "raw": "{{baseUrl}}/posts?userId=10",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts"
@@ -218,9 +218,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/posts",
+              "raw": "{{baseUrl}}/posts",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts"
@@ -244,9 +244,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/posts/2",
+              "raw": "{{baseUrl}}/posts/2",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts",
@@ -271,9 +271,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/posts/2",
+              "raw": "{{baseUrl}}/posts/2",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts",
@@ -298,9 +298,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/posts/2",
+              "raw": "{{baseUrl}}/posts/2",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts",
@@ -321,9 +321,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/posts/2222",
+              "raw": "{{baseUrl}}/posts/2222",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts",
@@ -339,9 +339,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/posts?userId=string",
+              "raw": "{{baseUrl}}/posts?userId=string",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts"
@@ -371,9 +371,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/posts",
+              "raw": "{{baseUrl}}/posts",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts"
@@ -397,9 +397,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/posts",
+              "raw": "{{baseUrl}}/posts",
               "host": [
-                "{{url}}"
+                "{{baseUrl}}"
               ],
               "path": [
                 "posts"

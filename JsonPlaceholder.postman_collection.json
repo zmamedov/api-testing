@@ -416,12 +416,64 @@
         },
         {
           "name": "POST Create Post",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Генерируем случайное число для уникальности заголовка\r",
+                  "const postTitle = pm.variables.replaceIn('{{$randomJobTitle}}');\r",
+                  "const postBody = pm.variables.replaceIn('{{$randomWords}} {{$randomWords}}');\r",
+                  "\r",
+                  "// Сохраняем в переменные, чтобы использовать в Body и потом в Tests\r",
+                  "pm.variables.set(\"req_title\", postTitle);\r",
+                  "pm.variables.set(\"req_body\", postBody);\r",
+                  "pm.variables.set(\"req_userId\", 1);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201 Created\", () => {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "// 2. Проверка соответствия данных (Бизнес-логика)\r",
+                  "pm.test(\"Response matches the sent data\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    \r",
+                  "    // Сравниваем ответ сервера с переменными из Pre-request\r",
+                  "    pm.expect(jsonData.title).to.eql(pm.variables.get(\"req_title\"));\r",
+                  "    pm.expect(jsonData.body).to.eql(pm.variables.get(\"req_body\"));\r",
+                  "    pm.expect(jsonData.userId).to.eql(pm.variables.get(\"req_userId\"));\r",
+                  "    \r",
+                  "    // Проверяем, что сервер выдал ID (обычно 101 для этого API)\r",
+                  "    pm.expect(jsonData.id).to.be.a('number').and.to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "// 3. Сохранение ID для следующих тестов (Senior-цепочка)\r",
+                  "const createdId = pm.response.json().id;\r",
+                  "pm.environment.set(\"current_post_id\", createdId);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Test json\",\r\n    \"body\": \"dfghjdfg 88dg cfgd;; gghf99999;;34,!\",\r\n    \"userId\": 178\r\n}",
+              "raw": "{\r\n  \"title\": \"{{req_title}}\",\r\n  \"body\": \"{{req_body}}\",\r\n  \"userId\": {{req_userId}}\r\n}",
               "options": {
                 "raw": {
                   "language": "json"

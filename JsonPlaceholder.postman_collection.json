@@ -222,6 +222,42 @@
         },
         {
           "name": "Get Nested Resources Of Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"All comments belong to postId = 1\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    \r",
+                  "    pm.expect(jsonData).to.be.an('array').and.not.empty;\r",
+                  "\r",
+                  "    jsonData.forEach((comment) => {\r",
+                  "        pm.expect(comment.postId).to.eql(1);\r",
+                  "    });\r",
+                  "});\r",
+                  "\r",
+                  "const schema = {\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"items\": {\r",
+                  "        \"type\": \"object\",\r",
+                  "        \"required\": [\"postId\", \"id\", \"name\", \"email\", \"body\"]\r",
+                  "    }\r",
+                  "};\r",
+                  "pm.test(\"Comments list matches JSON Schema\", () => {\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],

@@ -167,7 +167,7 @@
       "name": "Functional tests",
       "item": [
         {
-          "name": "Get Single Post By Valid Id",
+          "name": "GET Single Post By Valid Id",
           "event": [
             {
               "listen": "test",
@@ -196,7 +196,8 @@
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData.id).to.eql(2);\r",
                   "    pm.expect(jsonData.title).to.be.a('string').and.not.empty;\r",
-                  "});"
+                  "});\r",
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -283,7 +284,7 @@
           "response": []
         },
         {
-          "name": "Get All Posts By UserID",
+          "name": "GET All Posts By UserID",
           "event": [
             {
               "listen": "test",
@@ -318,7 +319,8 @@
                   "};\r",
                   "pm.test(\"Posts list matches JSON Schema\", () => {\r",
                   "    pm.response.to.have.jsonSchema(schema);\r",
-                  "});"
+                  "});\r",
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -349,6 +351,44 @@
         },
         {
           "name": "GET Posts With Pagination",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains exactly 5 items\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData).to.be.an('array').and.not.empty;\r",
+                  "    pm.expect(jsonData.length).to.eql(5); \r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"X-Total-Count header is present\", () => {\r",
+                  "    pm.response.to.have.header(\"X-Total-Count\");\r",
+                  "    const total = pm.response.headers.get(\"X-Total-Count\");\r",
+                  "    pm.expect(Number(total)).to.be.at.least(100);\r",
+                  "});\r",
+                  "\r",
+                  "const schema = {\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"items\": { \"type\": \"object\" },\r",
+                  "    \"minItems\": 5,\r",
+                  "    \"maxItems\": 5\r",
+                  "};\r",
+                  "pm.test(\"Pagination schema is valid\", () => {\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],

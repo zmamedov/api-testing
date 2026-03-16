@@ -569,6 +569,49 @@
         },
         {
           "name": "PATCH Update One Field Of Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка частичного обновления (Бизнес-логика)\r",
+                  "pm.test(\"Only body was updated, other fields are not changed\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    \r",
+                  "    // body стал новым\r",
+                  "    pm.expect(jsonData.body).to.eql(\"New body for the test PATCH\");\r",
+                  "    \r",
+                  "    // Проверка, что поля, которые НЕ отправлялись, НЕ обнулились\r",
+                  "    // (JSONPlaceholder имитирует это, возвращая старые значения)\r",
+                  "    pm.expect(jsonData.title).to.be.a('string').and.not.empty;\r",
+                  "    pm.expect(jsonData.userId).to.be.a('number');\r",
+                  "    pm.expect(jsonData.id).to.eql(2);\r",
+                  "});\r",
+                  "\r",
+                  "// Контрактная проверка (Schema)\r",
+                  "const schema = {\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"required\": [\"userId\", \"id\", \"title\", \"body\"],\r",
+                  "    \"properties\": {\r",
+                  "        \"body\": { \"const\": \"New body for the test PATCH\" } \r",
+                  "    }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"PATCH response matches strict schema\", () => {\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "PATCH",
             "header": [],

@@ -638,7 +638,7 @@
           "response": []
         },
         {
-          "name": "DELETE Delete Post",
+          "name": "DELETE Post",
           "event": [
             {
               "listen": "test",
@@ -734,6 +734,28 @@
       "item": [
         {
           "name": "GET Non-existent Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404 Not Found\", () => {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что объект пустой\r",
+                  "pm.test(\"Response body is an empty object\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    \r",
+                  "    pm.expect(Object.keys(jsonData).length).to.eql(0);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],
@@ -752,6 +774,28 @@
         },
         {
           "name": "GET Posts By Invalid Query Parameter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200 OK\", () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Бизнес-логика: фильтр возвращает пустой объект\r",
+                  "pm.test(\"Filtering by non-numeric ID returns empty list\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData).to.be.an('array').and.empty;\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],
@@ -775,12 +819,38 @@
         },
         {
           "name": "POST Create Post With Invalid Data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500 (Known Issue)\", () => {\r",
+                  "    // В реальном проекте было бы 400, \r",
+                  "    // но здесь фиксируем 500 как баг\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 500]);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что сервер не выдал конфиденциальную информацию\r",
+                  "pm.test(\"Response does not contain stack trace\", () => {\r",
+                  "    const responseText = pm.response.text();\r",
+                  "    // Проверка, что в 500 ошибке нет пути к файлам или код \r",
+                  "    pm.expect(responseText).to.not.include(\"SyntaxError\");\r",
+                  "    pm.expect(responseText).to.not.include(\"node_modules\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"incorrect_field\": \"Test json\",\r\n    \"body11\": 11111,\r\n    \"userId\": \"letter\"\r\n}",
+              "raw": "{\r\n    \"title\": \"invalid json\"",
               "options": {
                 "raw": {
                   "language": "json"
@@ -801,6 +871,35 @@
         },
         {
           "name": "POST Create Post With Empty Body",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201 Created\", () => {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка содержимого\r",
+                  "pm.test(\"Response contains only generated ID\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    \r",
+                  "    // Проверка, что ID создался\r",
+                  "    pm.expect(jsonData.id).to.exist.and.to.be.a('number');\r",
+                  "    \r",
+                  "    // Проверка, что остальные поля пустые (undefined)\r",
+                  "    pm.expect(jsonData.title).to.be.undefined;\r",
+                  "    pm.expect(jsonData.body).to.be.undefined;\r",
+                  "    pm.expect(jsonData.userId).to.be.undefined;\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [],
@@ -824,6 +923,32 @@
             }
           },
           "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              "pm.test(\"Response time is less than \" + pm.environment.get(\"maxResponseTime\") + \"ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"maxResponseTime\")));\r",
+              "});"
+            ]
+          }
         }
       ]
     }

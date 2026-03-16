@@ -639,6 +639,39 @@
         },
         {
           "name": "DELETE Delete Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200 or 204\", () => {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что объект пустой\r",
+                  "pm.test(\"Response body is an empty object\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    \r",
+                  "    pm.expect(Object.keys(jsonData).length).to.eql(0);\r",
+                  "});\r",
+                  "\r",
+                  "// Контрактная проверка (Schema)\r",
+                  "const schema = {\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"additionalProperties\": false\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Delete response has no properties\", () => {\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "DELETE",
             "header": [],

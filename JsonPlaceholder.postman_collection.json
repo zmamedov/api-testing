@@ -317,6 +317,7 @@
                   "        }\r",
                   "    }\r",
                   "};\r",
+                  "\r",
                   "pm.test(\"Posts list matches JSON Schema\", () => {\r",
                   "    pm.response.to.have.jsonSchema(schema);\r",
                   "});\r",
@@ -494,12 +495,59 @@
         },
         {
           "name": "PUT  Update Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что ресурс обновился (Бизнес-логика)\r",
+                  "pm.test(\"Resource was updated with new values\", () => {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "\r",
+                  "    // ID остался прежним\r",
+                  "    pm.expect(jsonData.id).to.eql(2);\r",
+                  "\r",
+                  "    // Заголовок теперь новый\r",
+                  "    pm.expect(jsonData.title).to.eql(\"Update: New post title\");\r",
+                  "\r",
+                  "    // Тело изменилось\r",
+                  "    pm.expect(jsonData.body).to.contain(\"New body\");\r",
+                  "});\r",
+                  "\r",
+                  "const schema = {\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"required\": [\"userId\", \"id\", \"title\", \"body\"],\r",
+                  "    \"properties\": {\r",
+                  "        \"userId\": { \"type\": \"number\" },\r",
+                  "        \"id\": { \"type\": \"number\" },\r",
+                  "        \"title\": { \"type\": \"string\" },\r",
+                  "        \"body\": { \"type\": \"string\" }\r",
+                  "    }\r",
+                  "\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Updated post matches JSON Schema\", () => {\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "request": {
             "method": "PUT",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 2,\r\n    \"title\": \"New post\",\r\n    \"body\": \"New body for the test PUT\"\r\n}",
+              "raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 2,\r\n    \"title\": \"Update: New post title\",\r\n    \"body\": \"New body for the test PUT\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"

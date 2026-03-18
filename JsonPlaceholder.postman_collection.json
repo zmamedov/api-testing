@@ -222,7 +222,7 @@
           "response": []
         },
         {
-          "name": "Get Nested Resources Of Post",
+          "name": "GET Nested Resources Of Post",
           "event": [
             {
               "listen": "test",
@@ -951,6 +951,200 @@
           }
         }
       ]
+    },
+    {
+      "name": "E2E Scenario",
+      "item": [
+        {
+          "name": "Step 1: Create a new user post",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Генерируем случайное число для уникальности заголовка\r",
+                  "const postTitle = pm.variables.replaceIn('{{$randomJobTitle}}');\r",
+                  "const postBody = pm.variables.replaceIn('{{$randomWords}} {{$randomWords}}');\r",
+                  "\r",
+                  "// Сохраняем в переменные, чтобы использовать в Body и потом в Tests\r",
+                  "pm.variables.set(\"req_title\", postTitle);\r",
+                  "pm.variables.set(\"req_body\", postBody);\r",
+                  "pm.variables.set(\"req_userId\", 1);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Step 1: Post created successfully\", () => {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "    const id = pm.response.json().id;\r",
+                  "    pm.environment.set(\"e2e_post_id\", id); // Сохранить ID для всей цепочки\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"{{req_title}}\",\r\n  \"body\": \"{{req_body}}\",\r\n  \"userId\": {{req_userId}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Step 2: Verify the created post exists",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Step 2: Resource is accessible\", () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    // Проверка ID\r",
+                  "    pm.expect(pm.response.json().id).to.eql(pm.environment.get(\"e2e_post_id\"));\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{e2e_post_id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{e2e_post_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Step 3: Update post title",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Step 3: Title updated in the flow\", () => {\r",
+                  "    pm.expect(pm.response.json().title).to.eql(\"E2E Updated Title\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"E2E Updated Title\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{e2e_post_id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{e2e_post_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Step 4: Remove the test post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Step 4: Resource deleted\", () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Очистка окружения после завершения сценария\r",
+                  "pm.environment.unset(\"e2e_post_id\");\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{e2e_post_id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{e2e_post_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "**Note:** This scenario demonstrates the logical flow of a post lifecycle. Due to the read-only nature of JSONPlaceholder API, Step 2 (GET) may return 404. In a real-world project, this chain ensures data consistency across the entire workflow."
     }
   ],
   "event": [

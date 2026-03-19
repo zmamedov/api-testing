@@ -1,88 +1,90 @@
 # API Testing Framework (Postman & JavaScript)
 
-## 1. Введение
+## 1. Introduction
 
-Данный проект представляет собой решение для автоматизированного тестирования REST API сервиса [JSON Placeholder](https://jsonplaceholder.typicode.com).
+This project provides an automated testing solution for the [JSON Placeholder](https://typicode.com) REST API service.
 
-**Цель проекта:** Продемонстрировать навыки тестирования REST API.
+**Project Goal:** To demonstrate advanced proficiency in REST API testing.
 
-## 2. Стек технологий
+## 2. Tech Stack
 
 <img title="Postman" src="icons/postman.svg" height="40" width="40"/> <img title="Javascript" src="icons/javascript.svg" height="40" width="40"/>
 
-* **Postman** — среда разработки и запуска тестов.
-* **JavaScript (Node.js)** — написание скриптов автоматизации (Pre-request/Post-response).
+* **Postman** — API development and testing environment.
+* **JavaScript (Node.js)** — automation scripting (Pre-request / Post-response snippets)
 
-## 3. Архитектура коллекции
+## 3. Test Architecture
 
-Проект разделен на логические слои согласно пирамиде тестирования:
+The project is structured into logical layers following the test pyramid principles:
 
-* **Smoke Tests:** Базовая проверка доступности эндпоинтов (/posts, /comments, /users и др.). Проверяется статус-код (200), время отклика и базовая структура JSON.
-* **Functional Tests:** Глубокое покрытие CRUD операций, пагинации, фильтрации и связей между ресурсами.
-* **Negative Tests:** Проверка устойчивости системы к некорректным данным (битый JSON, невалидные типы).
-* **E2E Scenario:** Сквозной сценарий "Life of a Post" (Create -> Get -> Update -> Delete) с передачей ID между запросами.
+* **Smoke Tests:** High-level health checks for core endpoints (/posts, /comments, /users, etc.). Verifies status codes (200 OK), response time and basic JSON scheme validation.
+* **Functional Tests:** Deep coverage of CRUD operations, pagination, filtering and resource relationship logic.
+* **Negative Tests:** System resilience validation against malformed data (invalid JSON, incorrect data types, 404 scenarios).
+* **E2E Scenario:** A comprehensive "Life of a Post" flow (Create -> Get -> Update -> Delete) using dynamic data chaining.
 
 <details>
-  <summary>Нажмите, чтобы увидеть полный список тест-кейсов</summary>
+  <summary>Click to view the full Test Cases list</summary>
 
-  ### Smoke tests
+### Smoke tests
 
-    1. Получение всех постов
+  1. Get All Posts
 
-    2. Получение всех комментариев
+  2. Get All Comments
 
-    3. Получение всех альбомов
+  3. Get All Photos
 
-    4. Получение всех фотографий
+  4. Get All Albums
 
-    5. Получение всех туду
+  5. Get All Todos
 
-    6. Получение всех юзеров
+  6. Get All Users
 
-  ### Functional tests
+### Functional tests
 
-    7. Получение одного поста по существующему ID
+  7. Get a single post by valid ID
 
-    8. Получение вложенных ресурсов поста
+  8. Get nested resources of a post
 
-    9. Фильтрация списка постов по параметру userId
+  9. Filter posts by userId parameter
 
-    10. Получение поста с пагинацией
+  10. Get posts with pagination (limit and page)
 
-    11. Создание нового поста
+  11. Create a new post (POST)
 
-    12. Полное обновление поста
+  12. Full post update (PUT)
 
-    13. Частичное обновление заголовка
+  13. Partial body update (PATCH)
 
-    14. Удаление поста
+  14. Delete a post (DELETE)
 
-  ### Negative tests
+### Negative tests
 
-    15. Получение несуществующего ресурса
+  15. Get non-existent post (404)
 
-    16. Отправка GET-запроса с невалидным query параметром
+  16. et posts by invalid query parameter
 
-    17. Отправка POST-запроса с некорректным JSON
+  17. OST request with malformed JSON syntax
 
-    18. Отправка POST-запроса с пустым JSON
+  18. OST request with an empty JSON body
 
-  ### E2E scenario
+### E2E scenario
+
+* Post Lifecycle Management (Sequential workflow)
 
 </details>
 
-## 4. Технические особенности
+## 4. Key Technical Features
 
-* **Dynamic Data:** Использование `{{$randomInt}}` и Faker-библиотек для генерации уникальных данных при каждом запуске.
-* **Contract Testing:** Каждый функциональный тест включает валидацию JSON Schema для защиты от изменений в структуре данных.
-* **Teardown & Cleanup:** Автоматическая очистка переменных окружения после завершения E2E сценария.
-* **Environmental Variables:** Гибкое управление базовым URL и таймаутами через Environment переменные.
+* **Dynamic Data:** Using `{{$randomInt}}` and Faker libraries to ensure unique test data for every execution.
+* **Contract Testing:** Each functional test includes  **JSON Schema Validation** to ensure data integrity.
+* **Teardown & Cleanup:** Automated environment variable cleanup after E2E scenario completion to maintain workspace hygiene.
+* **Environmental Variables:** Centralized configuration for Base URL, global headers and timeout thresholds via Environment variables.
 
-## 5. Инструкция по запуску
+## 5. How to Run
 
-1. Склонировать репозиторий.
-2. Импортировать `JsonPlaceholder.postman_collection.json` и `JSONPlaceholder-Test.postman_environment.json` в Postman.
-3. Выбрать окружение `JSONPlaceholder-Test`.
-4. Нажать **Run** в меню коллекции для запуска всех тестов.
+1. Clone the repository.
+2. Import `JsonPlaceholder.postman_collection.json` and `JSONPlaceholder-Test.postman_environment.json` into Postman.
+3. Select the `JSONPlaceholder-Test` environment.
+4. Open the Collection Runner and click **Run** to execute the entire suite.
 
 ![collection run page](icons/collection_run.png)

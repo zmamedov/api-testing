@@ -61,7 +61,7 @@ The project is structured into logical layers following the test pyramid princip
 
   15. Get non-existent post (404)
 
-  16. et posts by invalid query parameter
+  16. Get posts by invalid query parameter
 
   17. OST request with malformed JSON syntax
 

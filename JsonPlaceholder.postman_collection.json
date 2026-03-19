@@ -11,7 +11,7 @@
       "name": "Smoke tests",
       "item": [
         {
-          "name": "Get All Posts",
+          "name": "GET All Posts",
           "request": {
             "method": "GET",
             "header": [],
@@ -28,7 +28,7 @@
           "response": []
         },
         {
-          "name": "Get All Comments",
+          "name": "GET All Comments",
           "request": {
             "method": "GET",
             "header": [],
@@ -45,7 +45,7 @@
           "response": []
         },
         {
-          "name": "Get All Photos",
+          "name": "GET All Photos",
           "request": {
             "method": "GET",
             "header": [],
@@ -62,7 +62,7 @@
           "response": []
         },
         {
-          "name": "Get All Albums",
+          "name": "GET All Albums",
           "request": {
             "method": "GET",
             "header": [],
@@ -79,7 +79,7 @@
           "response": []
         },
         {
-          "name": "Get All Todos",
+          "name": "GET All Todos",
           "request": {
             "method": "GET",
             "header": [],
@@ -96,7 +96,7 @@
           "response": []
         },
         {
-          "name": "Get All Users",
+          "name": "GET All Users",
           "request": {
             "method": "GET",
             "header": [],
@@ -256,9 +256,11 @@
                   "        }\r",
                   "    }\r",
                   "};\r",
+                  "\r",
                   "pm.test(\"Comments list matches JSON Schema\", () => {\r",
                   "    pm.response.to.have.jsonSchema(schema);\r",
-                  "});"
+                  "});\r",
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -445,20 +447,20 @@
                   "    pm.response.to.have.status(201);\r",
                   "});\r",
                   "\r",
-                  "// 2. Проверка соответствия данных (Бизнес-логика)\r",
+                  "// Check data conformity (Business-logic)\r",
                   "pm.test(\"Response matches the sent data\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    \r",
-                  "    // Сравниваем ответ сервера с переменными из Pre-request\r",
+                  "    // Compare the response with the variables from the Pre-request\r",
                   "    pm.expect(jsonData.title).to.eql(pm.variables.get(\"req_title\"));\r",
                   "    pm.expect(jsonData.body).to.eql(pm.variables.get(\"req_body\"));\r",
                   "    pm.expect(jsonData.userId).to.eql(pm.variables.get(\"req_userId\"));\r",
                   "    \r",
-                  "    // Проверяем, что сервер выдал ID (обычно 101 для этого API)\r",
+                  "    // Check that is number and not Null\r",
                   "    pm.expect(jsonData.id).to.be.a('number').and.to.exist;\r",
                   "});\r",
                   "\r",
-                  "// 3. Сохранение ID для следующих тестов (Senior-цепочка)\r",
+                  "// Save ID for next tests\r",
                   "const createdId = pm.response.json().id;\r",
                   "pm.environment.set(\"current_post_id\", createdId);\r",
                   ""
@@ -504,17 +506,17 @@
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "// Проверка, что ресурс обновился (Бизнес-логика)\r",
+                  "// Check updating of resourse (Business-logic)\r",
                   "pm.test(\"Resource was updated with new values\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "\r",
-                  "    // ID остался прежним\r",
+                  "    // ID isn't changed\r",
                   "    pm.expect(jsonData.id).to.eql(2);\r",
                   "\r",
-                  "    // Заголовок теперь новый\r",
+                  "    // Check new title\r",
                   "    pm.expect(jsonData.title).to.eql(\"Update: New post title\");\r",
                   "\r",
-                  "    // Тело изменилось\r",
+                  "    // Check new body\r",
                   "    pm.expect(jsonData.body).to.contain(\"New body\");\r",
                   "});\r",
                   "\r",
@@ -568,7 +570,7 @@
           "response": []
         },
         {
-          "name": "PATCH Update One Field Of Post",
+          "name": "PATCH Update Body Of Post",
           "event": [
             {
               "listen": "test",
@@ -578,21 +580,19 @@
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "// Проверка частичного обновления (Бизнес-логика)\r",
+                  "// Check partial updating Проверка частичного обновления (Business-logic)\r",
                   "pm.test(\"Only body was updated, other fields are not changed\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    \r",
-                  "    // body стал новым\r",
+                  "    // Check new body\r",
                   "    pm.expect(jsonData.body).to.eql(\"New body for the test PATCH\");\r",
                   "    \r",
-                  "    // Проверка, что поля, которые НЕ отправлялись, НЕ обнулились\r",
-                  "    // (JSONPlaceholder имитирует это, возвращая старые значения)\r",
+                  "    // Check that other fields are not changed\r",
                   "    pm.expect(jsonData.title).to.be.a('string').and.not.empty;\r",
                   "    pm.expect(jsonData.userId).to.be.a('number');\r",
                   "    pm.expect(jsonData.id).to.eql(2);\r",
                   "});\r",
                   "\r",
-                  "// Контрактная проверка (Schema)\r",
                   "const schema = {\r",
                   "    \"type\": \"object\",\r",
                   "    \"required\": [\"userId\", \"id\", \"title\", \"body\"],\r",
@@ -648,14 +648,13 @@
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
                   "});\r",
                   "\r",
-                  "// Проверка, что объект пустой\r",
+                  "// Check that object is empty\r",
                   "pm.test(\"Response body is an empty object\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    \r",
                   "    pm.expect(Object.keys(jsonData).length).to.eql(0);\r",
                   "});\r",
                   "\r",
-                  "// Контрактная проверка (Schema)\r",
                   "const schema = {\r",
                   "    \"type\": \"object\",\r",
                   "    \"additionalProperties\": false\r",
@@ -723,7 +722,8 @@
               "\r",
               "pm.test(\"Content-Type is application/json\", function () {\r",
               "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-              "});"
+              "});\r",
+              ""
             ]
           }
         }
@@ -743,12 +743,13 @@
                   "    pm.response.to.have.status(404);\r",
                   "});\r",
                   "\r",
-                  "// Проверка, что объект пустой\r",
+                  "// Check that object is empty\r",
                   "pm.test(\"Response body is an empty object\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    \r",
                   "    pm.expect(Object.keys(jsonData).length).to.eql(0);\r",
-                  "});"
+                  "});\r",
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -783,7 +784,7 @@
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "// Бизнес-логика: фильтр возвращает пустой объект\r",
+                  "// Check that filter returns empty object\r",
                   "pm.test(\"Filtering by non-numeric ID returns empty list\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData).to.be.an('array').and.empty;\r",
@@ -825,15 +826,15 @@
               "script": {
                 "exec": [
                   "pm.test(\"Status code is 500 (Known Issue)\", () => {\r",
-                  "    // В реальном проекте было бы 400, \r",
-                  "    // но здесь фиксируем 500 как баг\r",
+                  "    // In real project status code have to be 400, \r",
+                  "    // but JSONPlaceholder - fake api and returns status code 500\r",
                   "    pm.expect(pm.response.code).to.be.oneOf([400, 500]);\r",
                   "});\r",
                   "\r",
-                  "// Проверка, что сервер не выдал конфиденциальную информацию\r",
+                  "// Check that server doesn't return confidental data\r",
                   "pm.test(\"Response does not contain stack trace\", () => {\r",
                   "    const responseText = pm.response.text();\r",
-                  "    // Проверка, что в 500 ошибке нет пути к файлам или код \r",
+                  "    // Check that response doesn't contain path or code \r",
                   "    pm.expect(responseText).to.not.include(\"SyntaxError\");\r",
                   "    pm.expect(responseText).to.not.include(\"node_modules\");\r",
                   "});\r",
@@ -880,14 +881,14 @@
                   "    pm.response.to.have.status(201);\r",
                   "});\r",
                   "\r",
-                  "// Проверка содержимого\r",
+                  "// Check response data\r",
                   "pm.test(\"Response contains only generated ID\", () => {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    \r",
-                  "    // Проверка, что ID создался\r",
+                  "    // Check that ID is created\r",
                   "    pm.expect(jsonData.id).to.exist.and.to.be.a('number');\r",
                   "    \r",
-                  "    // Проверка, что остальные поля пустые (undefined)\r",
+                  "    // Check that other fields are undefined\r",
                   "    pm.expect(jsonData.title).to.be.undefined;\r",
                   "    pm.expect(jsonData.body).to.be.undefined;\r",
                   "    pm.expect(jsonData.userId).to.be.undefined;\r",
@@ -962,11 +963,11 @@
               "listen": "prerequest",
               "script": {
                 "exec": [
-                  "// Генерируем случайное число для уникальности заголовка\r",
+                  "// Create random data\r",
                   "const postTitle = pm.variables.replaceIn('{{$randomJobTitle}}');\r",
                   "const postBody = pm.variables.replaceIn('{{$randomWords}} {{$randomWords}}');\r",
                   "\r",
-                  "// Сохраняем в переменные, чтобы использовать в Body и потом в Tests\r",
+                  "// Save in variables to use then in body and tests\r",
                   "pm.variables.set(\"req_title\", postTitle);\r",
                   "pm.variables.set(\"req_body\", postBody);\r",
                   "pm.variables.set(\"req_userId\", 1);\r",
@@ -984,7 +985,7 @@
                   "pm.test(\"Step 1: Post created successfully\", () => {\r",
                   "    pm.response.to.have.status(201);\r",
                   "    const id = pm.response.json().id;\r",
-                  "    pm.environment.set(\"e2e_post_id\", id); // Сохранить ID для всей цепочки\r",
+                  "    pm.environment.set(\"e2e_post_id\", id); // Save ID for all chain\r",
                   "});\r",
                   ""
                 ],
@@ -1026,9 +1027,10 @@
               "script": {
                 "exec": [
                   "pm.test(\"Step 2: Resource is accessible\", () => {\r",
-                  "    // Ожидаем 200, но допускаем 404 из-за специфики API\r",
+                  "    // In real project status code have to be 200, \r",
+                  "    // but JSONPlaceholder - fake api and returns status code 404\r",
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);\r",
-                  "    // Проверка ID\r",
+                  "    // Check ID\r",
                   "    pm.expect(pm.response.json().id).to.eql(pm.environment.get(\"e2e_post_id\"));\r",
                   "});\r",
                   ""
@@ -1109,7 +1111,7 @@
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "// Очистка окружения после завершения сценария\r",
+                  "// Cleanup environment after run tests\r",
                   "pm.environment.unset(\"e2e_post_id\");\r",
                   ""
                 ],
